@@ -8,8 +8,14 @@ describe("parse RLE", () => {
   });
 
   it("should return the correct matrix", () => {
-    let result = parseRLE("2o$2o!");
+    let result = parseRLE("2o$2o!", 2);
     let block = [[1, 1], [1, 1]];
+    expect(result).to.deep.equal(block);
+  });
+
+  it("should return the correct other more complex matrix", () => {
+    let result = parseRLE("bo$2bo$3o!", 3);
+    let block = [[0, 1, 0], [0, 0, 1], [1, 1, 1]];
     expect(result).to.deep.equal(block);
   });
 
