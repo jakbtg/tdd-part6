@@ -21,11 +21,47 @@ describe("Game of Life tests", () => {
 
 // begin work with Game of Life rules
 describe("Game of Life rules", () => {
-    xit("should return the correct number of neighbors", () => {
-        let game = new GameOfLife("patterns/glider.rle");
+    it("should return the correct number of neighbors with 3 neighbors", () => {
+        let game = new GameOfLife("patterns/block.rle");
         let grid = game.getInitialGrid();
         let neighbors = game.getNeighbors(grid, 1, 1);
+        expect(neighbors).to.equal(3);
+    });
+
+    it("should return the correct number of neighbors with 2 neighbors", () => {
+        let game = new GameOfLife("patterns/block.rle");
+        let grid = game.getInitialGrid();
+        let neighbors = game.getNeighbors(grid, 0, 1);
+        expect(neighbors).to.equal(2);
+    });
+
+    it("should return the correct number of neighbors with 1 neighbor", () => {
+        let game = new GameOfLife("patterns/block.rle");
+        let grid = game.getInitialGrid();
+        let neighbors = game.getNeighbors(grid, 0, 0);
+        expect(neighbors).to.equal(1);
+    });
+
+    it("should return the correct number of neighbors with 0 neighbors", () => {
+        let game = new GameOfLife("patterns/glider.rle");
+        let grid = game.getInitialGrid();
+        let neighbors = game.getNeighbors(grid, 0, 0);
+        expect(neighbors).to.equal(0);
+    });
+
+    it("should return the correct number of neighbors with more than 3 neighbors", () => {
+        let game = new GameOfLife("patterns/glider.rle");
+        let grid = game.getInitialGrid();
+        let neighbors = game.getNeighbors(grid, 2, 2);
         expect(neighbors).to.equal(5);
+    });
+
+    it("should return correct number of neighbors even if on the edge", () => {
+        let game = new GameOfLife("patterns/glider.rle");
+        // testing with a fake grid
+        let grid = [[0, 1, 1], [0, 0, 0], [1, 0, 0]];
+        let neighbors = game.getNeighbors(grid, 0, 0);
+        expect(neighbors).to.equal(3);
     });
 
     // First i probably need to make the matrix bigger and squared to test the edge cases
