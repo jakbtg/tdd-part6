@@ -50,4 +50,9 @@ describe("parse RLE file", () => {
     expect(rule).to.equal("B3/S23");
   });
 
+  it("should get the correct rle string", () => {
+    let rle = parseFile("patterns/block.rle").rle;
+    expect(rle).to.equal("2o$2o!");
+  });
+
 });
