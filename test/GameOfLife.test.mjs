@@ -8,3 +8,13 @@ describe("Game of Life tests", () => {
         expect(grid.getInitialGrid()).to.deep.equal(matrix);
     });
 });
+
+// begin work with Game of Life rules
+describe("Game of Life rules", () => {
+    it("should return the correct number of neighbors", () => {
+        let game = new GameOfLife("patterns/glider.rle");
+        let grid = game.getInitialGrid();
+        let neighbors = game.getNeighbors(grid, 1, 1);
+        expect(neighbors).to.equal(5);
+    });
+});
