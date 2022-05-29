@@ -30,6 +30,7 @@ export function parseFile(path) {
     x = parseInt(x);
     let y = lines.filter(line => /y\s*=\s*\d+/.test(line))[0].split(" ")[2];
     y = parseInt(y);
+    // let rule = lines.filter(line => /rule\s*=\s*\w+\/\w+/.test(line))[0].split(" ")[2];
     return {name, x, y};
   } catch (e) {
     throw "File not found";
