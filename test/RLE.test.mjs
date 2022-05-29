@@ -27,17 +27,17 @@ describe("parse RLE file", () => {
     }).to.throw("File not found");
   });
 
-  it("should return the correct name", () => {
+  it("should get the correct name", () => {
     let name = parseFile("patterns/block.rle").name;
     expect(name).to.equal("Block");
   });
 
-  it("should return the correct x", () => {
+  it("should get the correct x", () => {
     let size = parseFile("patterns/block.rle").x;
     expect(size).to.equal(2);
   });
 
-  it("should return the correct y", () => {
+  it("should get the correct y", () => {
     let size = parseFile("patterns/block.rle").y;
     expect(size).to.equal(2);
   });
@@ -53,6 +53,13 @@ describe("parse RLE file", () => {
   it("should get the correct rle string", () => {
     let rle = parseFile("patterns/block.rle").rle;
     expect(rle).to.equal("2o$2o!");
+  });
+
+  it("parseRLE should work with the rle string from the file", () => {
+    let rle = parseFile("patterns/block.rle").rle;
+    let result = parseRLE(rle, 2);
+    let block = [[1, 1], [1, 1]];
+    expect(result).to.deep.equal(block);
   });
 
 });
