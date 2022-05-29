@@ -63,12 +63,4 @@ describe("Game of Life rules", () => {
         let neighbors = game.getNeighbors(grid, 0, 0);
         expect(neighbors).to.equal(3);
     });
-
-    // First i probably need to make the matrix bigger and squared to test the edge cases
-    xit("should return the correct number of neighbors with another pattern", () => {
-        let game = new GameOfLife("patterns/block.rle");
-        let grid = game.getInitialGrid();
-        let neighbors = game.getNeighbors(grid, 0, 0);
-        expect(neighbors).to.equal(8);
-    });
 });
