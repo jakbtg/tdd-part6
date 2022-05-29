@@ -27,4 +27,9 @@ describe("parse RLE file", () => {
     }).to.throw("File not found");
   });
 
+  it("should return the correct name", () => {
+    let name = parseFile("patterns/block.rle");
+    expect(name).to.equal("Block");
+  });
+
 });

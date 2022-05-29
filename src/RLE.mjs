@@ -1,3 +1,5 @@
+import fs from 'fs';
+
 export function parseRLE(rle, x) {
   let decoded = rle.slice(0, rle.length - 1);
   decoded = decoded.replace(/(\d+)(\D)/g, function (match, num) {
@@ -19,9 +21,12 @@ export function parseRLE(rle, x) {
   return decoded;
 }
 
-export function parseFile(file) {
+export function parseFile(path) {
   try {
-    let rle = fs.readFileSync(file, "utf8");
+    let file = fs.readFileSync(path, "utf8");
+    let lines = file.split("\n");
+    let name = lines.filter(line => line.startsWith("#N"))[0].split(" ")[1];
+    return name;
   } catch (e) {
     throw "File not found";
   }
