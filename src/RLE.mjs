@@ -28,7 +28,9 @@ export function parseFile(path) {
     let name = lines.filter(line => line.startsWith("#N"))[0].split(" ")[1];
     let x = lines.filter(line => /x\s*=\s*\d+/.test(line))[0].split(" ")[2];
     x = parseInt(x);
-    return {name, x};
+    let y = lines.filter(line => /y\s*=\s*\d+/.test(line))[0].split(" ")[2];
+    y = parseInt(y);
+    return {name, x, y};
   } catch (e) {
     throw "File not found";
   }

@@ -32,8 +32,13 @@ describe("parse RLE file", () => {
     expect(name).to.equal("Block");
   });
 
-  it("should return the correct size", () => {
+  it("should return the correct x", () => {
     let size = parseFile("patterns/block.rle").x;
+    expect(size).to.equal(2);
+  });
+
+  it("should return the correct y", () => {
+    let size = parseFile("patterns/block.rle").y;
     expect(size).to.equal(2);
   });
 
