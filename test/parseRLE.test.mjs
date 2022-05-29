@@ -7,4 +7,10 @@ describe("parse RLE", () => {
     expect(result).to.be.an("array");
   });
 
+  it("should return the correct matrix", () => {
+    let result = parseRLE("2o$2o!");
+    let block = [[1, 1], [1, 1]];
+    expect(result).to.deep.equal(block);
+  });
+
 });
