@@ -31,8 +31,6 @@ export function parseFile(path) {
     let y = lines.filter(line => /y\s*=\s*\d+/.test(line))[0].split(" ")[5];
     y = parseInt(y);
     let rule = lines.filter(line => /rule\s*=\s*\w+\/\w+/.test(line))[0].split(" ")[8];
-    // let rle = lines.filter(string => !string.includes(" ") && string.includes("b") && string.includes("o") && string.includes("$"))[0];
-    // rle = rle.join("").replace(/(\r\n|\n|\r)/gm, "");
     let rle = lines[lines.length - 1];
     return {name, x, y, rule, rle};
   } catch (e) {
