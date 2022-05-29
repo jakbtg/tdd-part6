@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import { parseRLE, parseFile } from "../src/RLE.mjs";
+import { parseRLE, parseFile, encodeRLE } from "../src/RLE.mjs";
 
 describe("parse RLE string", () => {
   it("should return an array", () => {
@@ -61,5 +61,12 @@ describe("parse RLE file", () => {
     let block = [[1, 1], [1, 1]];
     expect(result).to.deep.equal(block);
   });
+});
 
+describe("Encode RLE", () => {
+  it("should return the correct rle string", () => {
+    let block = [[1, 1], [1, 1]];
+    let result = encodeRLE(block);
+    expect(result).to.equal("2o$2o!");
+  });
 });

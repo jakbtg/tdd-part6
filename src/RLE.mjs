@@ -39,3 +39,24 @@ export function parseFile(path) {
     throw "File not found";
   }
 }
+
+export function encodeRLE(matrix) {
+  let rle = "";
+  let block = matrix.map(row => row.join(""));
+  block = block.join("$");
+  block = block.replace(/1/g, "o").replace(/0/g, "b");
+  var count = 1;
+  for (let i = 0; i < block.length; i++) {
+    if (block[i] === block[i + 1]) {
+      count++;
+    } else {
+      if (count > 1) {
+        rle += count;
+      }
+      rle += block[i];
+      count = 1;
+    }
+  }
+  rle += "!";
+  return rle;
+}
