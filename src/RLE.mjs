@@ -26,7 +26,9 @@ export function parseFile(path) {
     let file = fs.readFileSync(path, "utf8");
     let lines = file.split("\n");
     let name = lines.filter(line => line.startsWith("#N"))[0].split(" ")[1];
-    return name;
+    let x = lines.filter(line => /x\s*=\s*\d+/.test(line))[0].split(" ")[2];
+    x = parseInt(x);
+    return {name, x};
   } catch (e) {
     throw "File not found";
   }

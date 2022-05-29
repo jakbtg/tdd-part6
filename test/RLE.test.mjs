@@ -28,8 +28,13 @@ describe("parse RLE file", () => {
   });
 
   it("should return the correct name", () => {
-    let name = parseFile("patterns/block.rle");
+    let name = parseFile("patterns/block.rle").name;
     expect(name).to.equal("Block");
+  });
+
+  it("should return the correct size", () => {
+    let size = parseFile("patterns/block.rle").x;
+    expect(size).to.equal(2);
   });
 
 });
