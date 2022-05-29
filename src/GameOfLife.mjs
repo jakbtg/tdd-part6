@@ -8,7 +8,26 @@ export class GameOfLife {
     }
 
     getInitialGrid() {
-        return parseRLE(this.pattern.rle, this.pattern.x);
+        let grid = [];
+        let dim = this.getMax() + 2;
+        for (let row = 0; row < dim; row++) {
+            grid[row] = [];
+            for (let col = 0; col < dim; col++) {
+                grid[row][col] = 0;
+            }
+        }
+        let rle = parseRLE(this.pattern.rle, this.pattern.x);
+        console.log(this.pattern.x, this.pattern.y);
+        for (let row = 0; row < this.pattern.y; row++) {
+            for (let col = 0; col < this.pattern.x; col++) {
+                grid[row + 1][col + 1] = rle[row][col];
+            }
+        }
+        return grid;
+    }
+
+    getMax() {
+        return Math.max(this.pattern.x, this.pattern.y);
     }
 
     getNeighbors(grid, x, y) {
