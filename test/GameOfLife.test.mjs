@@ -93,11 +93,22 @@ describe("Game of Life determining the next generation", () => {
         expect(nextGen).to.deep.equal([[0, 0, 1, 0, 0], [0, 0, 1, 0, 0], [0, 0, 1, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0]]);
     });
 
-    it("correct next generation even if applied more than once", () => {
+    it("correct next generation even if applied twice", () => {
         let game = new GameOfLife("patterns/blinker.rle");
         let grid = game.getInitialGrid();
         let nextGen = game.getNextGeneration(grid);
         nextGen = game.getNextGeneration(nextGen);
         expect(nextGen).to.deep.equal([[0, 0, 0, 0, 0], [0, 1, 1, 1, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0]]);
+    });
+
+    it("should return the correct next generation even crossing the edges", () => {
+        let game = new GameOfLife("patterns/glider.rle");
+        let grid = game.getInitialGrid();
+        let nextGen = game.getNextGeneration(grid);
+        nextGen = game.getNextGeneration(nextGen);
+        nextGen = game.getNextGeneration(nextGen);
+        nextGen = game.getNextGeneration(nextGen);
+        nextGen = game.getNextGeneration(nextGen);
+        expect(nextGen).to.deep.equal([[0, 0, 0, 1, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 1, 0, 1], [0, 0, 0, 1, 1]]);
     });
 });
