@@ -1,7 +1,7 @@
 import { expect } from "chai";
-import { parseRLE } from "../src/parseRLE.mjs";
+import { parseRLE, parseFile } from "../src/RLE.mjs";
 
-describe("parse RLE", () => {
+describe("parse RLE string", () => {
   it("should return an array", () => {
     let result = parseRLE("");
     expect(result).to.be.an("array");
@@ -17,6 +17,14 @@ describe("parse RLE", () => {
     let result = parseRLE("bo$2bo$3o!", 3);
     let block = [[0, 1, 0], [0, 0, 1], [1, 1, 1]];
     expect(result).to.deep.equal(block);
+  });
+});
+
+describe("parse RLE file", () => {
+  it("can throw an error if the file is not found", () => {
+    expect(() => {
+      parseFile("not existing file");
+    }).to.throw("File not found");
   });
 
 });

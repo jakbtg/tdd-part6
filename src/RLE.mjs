@@ -18,3 +18,11 @@ export function parseRLE(rle, x) {
   });
   return decoded;
 }
+
+export function parseFile(file) {
+  try {
+    let rle = fs.readFileSync(file, "utf8");
+  } catch (e) {
+    throw "File not found";
+  }
+}
