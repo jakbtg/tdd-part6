@@ -17,7 +17,6 @@ export class GameOfLife {
             }
         }
         let rle = parseRLE(this.pattern.rle, this.pattern.x);
-        console.log(this.pattern.x, this.pattern.y);
         for (let row = 0; row < this.pattern.y; row++) {
             for (let col = 0; col < this.pattern.x; col++) {
                 grid[row + 1][col + 1] = rle[row][col];
@@ -30,18 +29,20 @@ export class GameOfLife {
         return Math.max(this.pattern.x, this.pattern.y);
     }
 
-    getNeighbors(grid, x, y) {
+    getNeighbors(grid, row, col) {
         let neighbors = 0;
+        let rows = grid.length;
+        let cols = grid.length;
         for (let i = -1; i < 2; i++) {
             for (let j = -1; j < 2; j++) {
-                let xNeighbor = (x + j + this.pattern.x) % this.pattern.x;
-                let yNeighbor = (y + i + this.pattern.y) % this.pattern.y;
-                if (grid[yNeighbor][xNeighbor] === 1) {
+                let colNeighbor = (col + j + cols) % cols;
+                let rowNeighbor = (row + i + rows) % rows;
+                if (grid[rowNeighbor][colNeighbor] === 1) {
                     neighbors += 1;
                 }
             }
         }
-        neighbors -= grid[y][x];
+        neighbors -= grid[row][col];
         return neighbors;
     }
 
