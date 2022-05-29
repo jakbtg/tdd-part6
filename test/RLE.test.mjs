@@ -38,14 +38,11 @@ describe("parse RLE file", () => {
   });
 
   it("should get the correct y", () => {
-    let size = parseFile("patterns/block.rle").y;
-    expect(size).to.equal(2);
+    let size = parseFile("patterns/blinker.rle").y;
+    expect(size).to.equal(1);
   });
 
-  // I don't know why this test fails, it should be correct, since it's the same implementation as the others
-  // But anyway, seems like every pattern has the same rule, so it should be fine not to get the rule
-  // I will leave it commented out
-  xit("should get the correct rule", () => {
+  it("should get the correct rule", () => {
     let rule = parseFile("patterns/block.rle").rule;
     expect(rule).to.equal("B3/S23");
   });
