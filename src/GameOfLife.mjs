@@ -46,4 +46,31 @@ export class GameOfLife {
         return neighbors;
     }
 
+    getNextGeneration(grid) {
+        let nextGen = [];
+        let rows = grid.length;
+        let cols = grid.length;
+        for (let row = 0; row < rows; row++) {
+            nextGen[row] = [];
+            for (let col = 0; col < cols; col++) {
+                let neighbors = this.getNeighbors(grid, row, col);
+                if (grid[row][col] === 1) {
+                    if (neighbors < 2 || neighbors > 3) {
+                        nextGen[row][col] = 0;
+                    } else {
+                        nextGen[row][col] = 1;
+                    }
+                } else {
+                    if (neighbors === 3) {
+                        nextGen[row][col] = 1;
+                    } else {
+                        nextGen[row][col] = 0;
+                    }
+                }
+            }
+        }
+        return nextGen;
+    }
+
+
 }

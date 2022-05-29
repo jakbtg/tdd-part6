@@ -19,8 +19,7 @@ describe("Game of Life tests", () => {
     });
 });
 
-// begin work with Game of Life rules
-describe("Game of Life rules", () => {
+describe("Game of Life finding neighbors", () => {
     it("should return the correct number of neighbors with 3 neighbors", () => {
         let game = new GameOfLife("patterns/block.rle");
         let grid = game.getInitialGrid();
@@ -62,5 +61,43 @@ describe("Game of Life rules", () => {
         let grid = [[0, 1, 1], [0, 0, 0], [1, 0, 0]];
         let neighbors = game.getNeighbors(grid, 0, 0);
         expect(neighbors).to.equal(3);
+    });
+});
+
+describe("Game of Life determining the next generation", () => {
+    it("should return a grid", () => {
+        let game = new GameOfLife("patterns/glider.rle");
+        let grid = game.getInitialGrid();
+        let nextGen = game.getNextGeneration(grid);
+        expect(nextGen).to.be.an("array");
+    });
+
+    it("should return a grid with the correct size", () => {
+        let game = new GameOfLife("patterns/glider.rle");
+        let grid = game.getInitialGrid();
+        let nextGen = game.getNextGeneration(grid);
+        expect(nextGen.length).to.equal(grid.length);
+    });
+
+    it("should return the correct next generation, with no changes", () => {
+        let game = new GameOfLife("patterns/block.rle");
+        let grid = game.getInitialGrid();
+        let nextGen = game.getNextGeneration(grid);
+        expect(nextGen).to.deep.equal([[0, 0, 0, 0], [0, 1, 1, 0], [0, 1, 1, 0], [0, 0, 0, 0]]);
+    });
+
+    it("should return the correct next generation, with changes", () => {
+        let game = new GameOfLife("patterns/blinker.rle");
+        let grid = game.getInitialGrid();
+        let nextGen = game.getNextGeneration(grid);
+        expect(nextGen).to.deep.equal([[0, 0, 1, 0, 0], [0, 0, 1, 0, 0], [0, 0, 1, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0]]);
+    });
+
+    it("correct next generation even if applied more than once", () => {
+        let game = new GameOfLife("patterns/blinker.rle");
+        let grid = game.getInitialGrid();
+        let nextGen = game.getNextGeneration(grid);
+        nextGen = game.getNextGeneration(nextGen);
+        expect(nextGen).to.deep.equal([[0, 0, 0, 0, 0], [0, 1, 1, 1, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0]]);
     });
 });
