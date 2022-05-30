@@ -145,3 +145,9 @@ describe("Game of Life determining the next generation", () => {
         expect(nextGen).to.deep.equal([[0, 0, 0, 1, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 1, 0, 1], [0, 0, 0, 1, 1]]);
     });
 });
+
+
+describe("Game of Life output tests", () => {
+    // TODO: test the output of the game
+
+});

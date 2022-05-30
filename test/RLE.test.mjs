@@ -66,4 +66,10 @@ describe("Encode RLE", () => {
     let result = encodeRLE(block);
     expect(result).to.equal("2o$2o!");
   });
+
+  it("should return the correct rle string if each cell is dead", () => {
+    let grid = [[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]];
+    let result = encodeRLE(grid);
+    expect(result).to.equal("4b$4b$4b$4b!");
+  });
 });
