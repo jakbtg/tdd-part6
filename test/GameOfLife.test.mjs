@@ -19,11 +19,25 @@ describe("Game of Life tests", () => {
         expect(grid.getInitialGrid().length).to.equal(5);
     });
 
-    it("iterations calls getNextGeneration the correct number of times", () => {
+    it("iterations calls getNextGeneration once", () => {
         let game = new GameOfLife("patterns/blinker.rle");
         let spy = sinon.spy(game, "getNextGeneration");
         game.iterations(1);
         expect(spy.callCount).to.equal(1);
+    });
+
+    it("iterations calls getNextGeneration twice", () => {
+        let game = new GameOfLife("patterns/blinker.rle");
+        let spy = sinon.spy(game, "getNextGeneration");
+        game.iterations(2);
+        expect(spy.callCount).to.equal(2);
+    });
+
+    it("iterations calls getNextGeneration more than twice", () => {
+        let game = new GameOfLife("patterns/blinker.rle");
+        let spy = sinon.spy(game, "getNextGeneration");
+        game.iterations(5);
+        expect(spy.callCount).to.equal(5);
     });
 });
 
