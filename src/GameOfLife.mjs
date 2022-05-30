@@ -15,18 +15,23 @@ export class GameOfLife {
     }
 
     getInitialGrid() {
+        let grid = this.createEmptyGrid();
+        let rle = parseRLE(this.pattern.rle, this.pattern.x);
+        for (let row = 0; row < this.pattern.y; row++) {
+            for (let col = 0; col < this.pattern.x; col++) {
+                grid[row + 1][col + 1] = rle[row][col];
+            }
+        }
+        return grid;
+    }
+
+    createEmptyGrid() {
         let grid = [];
         let dim = this.getMax() + 2;
         for (let row = 0; row < dim; row++) {
             grid[row] = [];
             for (let col = 0; col < dim; col++) {
                 grid[row][col] = 0;
-            }
-        }
-        let rle = parseRLE(this.pattern.rle, this.pattern.x);
-        for (let row = 0; row < this.pattern.y; row++) {
-            for (let col = 0; col < this.pattern.x; col++) {
-                grid[row + 1][col + 1] = rle[row][col];
             }
         }
         return grid;
@@ -61,22 +66,34 @@ export class GameOfLife {
             nextGen[row] = [];
             for (let col = 0; col < cols; col++) {
                 let neighbors = this.getNeighbors(grid, row, col);
-                if (grid[row][col] === 1) {
-                    if (neighbors < 2 || neighbors > 3) {
-                        nextGen[row][col] = 0;
-                    } else {
-                        nextGen[row][col] = 1;
-                    }
+                if (this.isAlive(grid, row, col)) {
+                    this.applyAliveCellRules(row, col, nextGen, neighbors);
                 } else {
-                    if (neighbors === 3) {
-                        nextGen[row][col] = 1;
-                    } else {
-                        nextGen[row][col] = 0;
-                    }
+                    this.applyDeadCellRules(row, col, nextGen, neighbors);
                 }
             }
         }
         return nextGen;
+    }
+
+    applyAliveCellRules(row, col, nextGen, neighbors) {
+        if (neighbors < 2 || neighbors > 3) {
+            nextGen[row][col] = 0;
+        } else {
+            nextGen[row][col] = 1;
+        }
+    }
+
+    applyDeadCellRules(row, col, nextGen, neighbors) {
+        if (neighbors === 3) {
+            nextGen[row][col] = 1;
+        } else {
+            nextGen[row][col] = 0;
+        }
+    }
+
+    isAlive(grid, row, col) {
+        return grid[row][col] === 1;
     }
     
     iterations() {
