@@ -1,6 +1,7 @@
 import { expect } from "chai";
 import sinon from "sinon";
 import { GameOfLife } from "../src/GameOfLife.mjs";
+import fs from "fs";
 
 describe("Game of Life tests", () => {
     it("can create a grid from a given pattern", () => {
@@ -148,6 +149,11 @@ describe("Game of Life determining the next generation", () => {
 
 
 describe("Game of Life output tests", () => {
-    // TODO: test the output of the game
-
+    it("should create a file", () => {
+        let game = new GameOfLife("patterns/block.rle", 0);
+        game.output();
+        expect(fs.existsSync("./output/1.rle")).to.be.true;
+        // delete the file
+        fs.unlinkSync("./output/1.rle");
+    });
 });

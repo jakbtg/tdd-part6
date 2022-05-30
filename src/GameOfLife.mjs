@@ -1,12 +1,14 @@
-import { parseFile, parseRLE } from "./RLE.mjs";
+import { encodeRLE, parseFile, parseRLE, writeRLEFile } from "./RLE.mjs";
 
 export class GameOfLife {
     pattern;
     numIterations;
+    numOutput;
 
     constructor(file, numIterations) {
         this.pattern = parseFile(file);
         this.numIterations = numIterations;
+        this.numOutput = 1;
     }
 
     getInitialGrid() {
@@ -80,6 +82,14 @@ export class GameOfLife {
             grid = this.getNextGeneration(grid);
         }
         return grid;
+    }
+
+    output() {
+        let grid = this.iterations();
+        let rle = encodeRLE(grid);
+        let comment = "Playing the game of life with " + this.pattern.name + " and " + this.numIterations + " iterations";
+        writeRLEFile(this.numOutput, comment, rle);
+        this.numOutput += 1;
     }
 
 }
