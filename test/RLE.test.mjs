@@ -93,4 +93,15 @@ describe("Write RLE file", () => {
     fs.unlinkSync(`./output/${name}.rle`);
   });
 
+  it("should create a file with the correct content", () => {
+    let grid = [[0, 0, 0, 0], [0, 1, 1, 0], [0, 1, 1, 0], [0, 0, 0, 0]];
+    let result = encodeRLE(grid);
+    let comment = "This file is a test"
+    let name = "test";
+    writeRLEFile(name, comment, result);
+    let file = fs.readFileSync(`./output/${name}.rle`, "utf8");
+    expect(file).to.equal(`#C ${comment}\n${result}`);
+    // I will delete the file after the test
+    fs.unlinkSync(`./output/${name}.rle`);
+  });
 });
