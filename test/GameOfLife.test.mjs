@@ -1,4 +1,5 @@
 import { expect } from "chai";
+import sinon from "sinon";
 import { GameOfLife } from "../src/GameOfLife.mjs";
 
 describe("Game of Life tests", () => {
@@ -16,6 +17,13 @@ describe("Game of Life tests", () => {
     it("grid should be two cell bigger than the max of x or y of the pattern", () => {
         let grid = new GameOfLife("patterns/blinker.rle");
         expect(grid.getInitialGrid().length).to.equal(5);
+    });
+
+    it("iterations calls getNextGeneration the correct number of times", () => {
+        let game = new GameOfLife("patterns/blinker.rle");
+        let spy = sinon.spy(game, "getNextGeneration");
+        game.iterations(1);
+        expect(spy.callCount).to.equal(1);
     });
 });
 

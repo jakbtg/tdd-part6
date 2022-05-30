@@ -71,6 +71,13 @@ export class GameOfLife {
         }
         return nextGen;
     }
-
+    
+    iterations(num) {
+        let grid = this.getInitialGrid();
+        for (let i = 0; i < num; i++) {
+            grid = this.getNextGeneration(grid);
+        }
+        return grid;
+    }
 
 }
