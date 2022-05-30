@@ -2,9 +2,11 @@ import { parseFile, parseRLE } from "./RLE.mjs";
 
 export class GameOfLife {
     pattern;
+    numIterations;
 
-    constructor(file) {
+    constructor(file, numIterations) {
         this.pattern = parseFile(file);
+        this.numIterations = numIterations;
     }
 
     getInitialGrid() {
@@ -72,9 +74,9 @@ export class GameOfLife {
         return nextGen;
     }
     
-    iterations(num) {
+    iterations() {
         let grid = this.getInitialGrid();
-        for (let i = 0; i < num; i++) {
+        for (let i = 0; i < this.numIterations; i++) {
             grid = this.getNextGeneration(grid);
         }
         return grid;
