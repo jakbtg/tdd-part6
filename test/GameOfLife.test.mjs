@@ -3,8 +3,6 @@ import sinon from "sinon";
 import { GameOfLife } from "../src/GameOfLife.mjs";
 
 describe("Game of Life tests", () => {
-    // refactor because the number of iterations should be passed in as a parameter of the constructor of the GameOfLife class
-
     it("can create a grid from a given pattern", () => {
         let matrix = [[0, 0, 0, 0], [0, 1, 1, 0], [0, 1, 1, 0], [0, 0, 0, 0]];
         let grid = new GameOfLife("patterns/block.rle", 0);
@@ -50,6 +48,7 @@ describe("Game of Life tests", () => {
     });
 });
 
+
 describe("Game of Life finding neighbors", () => {
     it("should return the correct number of neighbors with 3 neighbors", () => {
         let game = new GameOfLife("patterns/block.rle", 0);
@@ -94,6 +93,7 @@ describe("Game of Life finding neighbors", () => {
         expect(neighbors).to.equal(3);
     });
 });
+
 
 describe("Game of Life determining the next generation", () => {
     // Here I'll set the num of iterations to 0, because I'm not testing the number of iterations, but the next generation
