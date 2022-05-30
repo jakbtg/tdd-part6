@@ -152,14 +152,15 @@ describe("Game of Life output tests", () => {
     it("should create a file", () => {
         let game = new GameOfLife("patterns/block.rle", 0);
         game.output();
-        expect(fs.existsSync("./output/1.rle")).to.be.true;
+        expect(fs.existsSync("./output/block.rle")).to.be.true;
         // delete the file
-        fs.unlinkSync("./output/1.rle");
+        fs.unlinkSync("./output/block.rle");
     });
 });
 
+
 describe("Game of Life input tests", () => {
-    // Actually don't know how to test input from user
+    // Actually don't know how to test input from user. I will leave it commented.
     xit("should create new GameOfLife object with a pattern given by the user", () => {
         let game = new GameOfLife(process.argv[2], 0);
         expect(game).to.be.an("object");

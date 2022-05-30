@@ -3,7 +3,6 @@ import { encodeRLE, parseFile, parseRLE, writeRLEFile } from "./RLE.mjs";
 export class GameOfLife {
     pattern;
     numIterations;
-    numOutput;
 
     constructor(file, numIterations) {
         if (process.argv[2] != undefined && process.argv[3] != undefined) {
@@ -13,8 +12,6 @@ export class GameOfLife {
             this.pattern = parseFile(file);
             this.numIterations = numIterations;
         }
-        this.numOutput = 1;
-        // this.output();
     }
 
     getInitialGrid() {
@@ -94,8 +91,6 @@ export class GameOfLife {
         let grid = this.iterations();
         let rle = encodeRLE(grid);
         let comment = "Playing the game of life with " + this.pattern.name + " and " + this.numIterations + " iterations";
-        writeRLEFile(this.numOutput, comment, rle);
-        this.numOutput += 1;
+        writeRLEFile(this.pattern.name, comment, rle);
     }
-
 }
