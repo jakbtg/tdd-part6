@@ -61,9 +61,9 @@ describe("parse RLE file", () => {
 });
 
 describe("Encode RLE", () => {
-  it("should return the correct rle string", () => {
-    let block = [[1, 1], [1, 1]];
-    let result = encodeRLE(block);
+  it("should return the correct rle string if each cell is alive", () => {
+    let grid = [[1, 1], [1, 1]];
+    let result = encodeRLE(grid);
     expect(result).to.equal("2o$2o!");
   });
 
@@ -71,5 +71,11 @@ describe("Encode RLE", () => {
     let grid = [[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]];
     let result = encodeRLE(grid);
     expect(result).to.equal("4b$4b$4b$4b!");
+  });
+
+  it("should return the correct rle string with some alive and some dead cells", () => {
+    let grid = [[0, 0, 0, 0], [0, 1, 1, 0], [0, 1, 1, 0], [0, 0, 0, 0]];
+    let result = encodeRLE(grid);
+    expect(result).to.equal("4b$b2ob$b2ob$4b!");
   });
 });
