@@ -6,9 +6,15 @@ export class GameOfLife {
     numOutput;
 
     constructor(file, numIterations) {
-        this.pattern = parseFile(file);
-        this.numIterations = numIterations;
+        if (process.argv[2] != undefined && process.argv[3] != undefined) {
+            this.pattern = parseFile(process.argv[2]);
+            this.numIterations = parseInt(process.argv[3]);
+        } else {
+            this.pattern = parseFile(file);
+            this.numIterations = numIterations;
+        }
         this.numOutput = 1;
+        // this.output();
     }
 
     getInitialGrid() {

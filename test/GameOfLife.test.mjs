@@ -157,3 +157,12 @@ describe("Game of Life output tests", () => {
         fs.unlinkSync("./output/1.rle");
     });
 });
+
+describe("Game of Life input tests", () => {
+    // Actually don't know how to test input from user
+    xit("should create new GameOfLife object with a pattern given by the user", () => {
+        let game = new GameOfLife(process.argv[2], 0);
+        expect(game).to.be.an("object");
+    });
+
+});

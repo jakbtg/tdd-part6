@@ -4,6 +4,7 @@
   "description": "TODO",
   "license": "TODO",
   "private": true,
+  "type": "module",
   "dependencies": {
     "lodash": "^4.17.15",
     "sinon": "^14.0.0"
