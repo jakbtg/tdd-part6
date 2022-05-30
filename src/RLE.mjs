@@ -58,3 +58,9 @@ export function encodeRLE(matrix) {
   rle += "!";
   return rle;
 }
+
+export function writeRLEFile(name, comment, rle) {
+  let file = "#C " + comment + "\n";
+  file += rle;
+  fs.writeFileSync(`./output/${name}.rle`, file);
+}

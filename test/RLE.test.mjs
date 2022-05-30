@@ -1,5 +1,6 @@
 import { expect } from "chai";
-import { parseRLE, parseFile, encodeRLE } from "../src/RLE.mjs";
+import { parseRLE, parseFile, encodeRLE, writeRLEFile } from "../src/RLE.mjs";
+import fs from "fs";
 
 describe("parse RLE string", () => {
   it("should return an array", () => {
@@ -78,4 +79,18 @@ describe("Encode RLE", () => {
     let result = encodeRLE(grid);
     expect(result).to.equal("4b$b2ob$b2ob$4b!");
   });
+});
+
+describe("Write RLE file", () => {
+  it("should create a file", () => {
+    let grid = [[0, 0, 0, 0], [0, 1, 1, 0], [0, 1, 1, 0], [0, 0, 0, 0]];
+    let result = encodeRLE(grid);
+    let comment = "This file is a test"
+    let name = "test";
+    writeRLEFile(name, comment, result);
+    expect(fs.existsSync(`./output/${name}.rle`)).to.equal(true);
+    // I will delete the file after the test
+    fs.unlinkSync(`./output/${name}.rle`);
+  });
+
 });
